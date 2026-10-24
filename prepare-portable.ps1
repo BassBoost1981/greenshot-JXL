@@ -82,4 +82,11 @@ foreach ($pluginDir in $pluginDirs) {
         # greenshot.{module}.{ietf}.ini, next to the core language packs
         Copy-Item "$pluginLanguages\greenshot.*.ini" "$OutputPath\Languages" -Force
     }
+
+    $pluginNativeLicenses = "$RepositoryRootPath\src\$pluginName\Native\licenses"
+    if (Test-Path $pluginNativeLicenses) {
+        # The licenses of the native libraries a plugin brings (libjxl of the JPEG XL plugin)
+        New-Item -ItemType Directory -Path "$OutputPath\Plugins\$pluginName\licenses" -Force | Out-Null
+        Copy-Item "$pluginNativeLicenses\LICENSE.*" "$OutputPath\Plugins\$pluginName\licenses" -Force
+    }
 }

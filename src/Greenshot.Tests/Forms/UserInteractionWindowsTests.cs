@@ -196,6 +196,19 @@ namespace Greenshot.Tests.Forms
         }
 
         [Fact]
+        public void QualityWindow_Jxl_EnablesTheQuality()
+        {
+            RunOnSta(() =>
+            {
+                var window = new QualityWindow(new SurfaceOutputSettings("jxl", 100, false));
+                var slider = Find<Slider>(window);
+                Assert.True(slider.IsEnabled);
+                Assert.Equal(100, slider.Value);
+                window.Close();
+            });
+        }
+
+        [Fact]
         public void QualityWindow_Cancel_KeepsTheValues()
         {
             RunOnSta(() =>

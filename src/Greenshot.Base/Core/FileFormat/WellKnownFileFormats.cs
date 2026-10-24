@@ -37,6 +37,7 @@ public static class WellKnownFileFormats
     public const string Png = "png";
     public const string Tiff = "tiff";
     public const string Jxr = "jxr";
+    public const string Jxl = "jxl";
     public const string Greenshot = "greenshot";
     public const string Ico = "ico";
 
@@ -59,6 +60,7 @@ public static class WellKnownFileFormats
                string.Equals(format, Png, StringComparison.OrdinalIgnoreCase) ||
                string.Equals(format, Tiff, StringComparison.OrdinalIgnoreCase) ||
                string.Equals(format, Jxr, StringComparison.OrdinalIgnoreCase) ||
+               string.Equals(format, Jxl, StringComparison.OrdinalIgnoreCase) ||
                string.Equals(format, Greenshot, StringComparison.OrdinalIgnoreCase) ||
                string.Equals(format, Ico, StringComparison.OrdinalIgnoreCase);
     }

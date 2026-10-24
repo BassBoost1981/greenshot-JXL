@@ -4,6 +4,7 @@
 ;#include "customuploader.iss"
 #include "dropbox.iss"
 #include "externalcommand.iss"
+#include "jxl.iss"
 #include "office.iss"
 #include "pdf.iss"
 #include "recipeeditor.iss"

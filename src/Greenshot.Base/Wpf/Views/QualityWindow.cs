@@ -29,7 +29,7 @@ using Greenshot.Base.Languages;
 namespace Greenshot.Base.Wpf.Views
 {
     /// <summary>
-    /// Asks for the output settings of a file: the JPEG quality (only for JPEG) and whether to reduce the colors.
+    /// Asks for the output settings of a file: the quality (only for JPEG and JPEG XL) and whether to reduce the colors.
     /// OK takes the values; Cancel, Escape or closing the window means the user doesn't want to save (the settings stay as they were).
     /// </summary>
     public sealed class QualityWindow : Window
@@ -59,7 +59,9 @@ namespace Greenshot.Base.Wpf.Views
                 // The window works without an icon
             }
 
-            bool isJpeg = WellKnownFileFormats.IsEqualFormat(WellKnownFileFormats.Jpg, settings.Format);
+            // JPEG XL (Greenshot.Plugin.Jxl) uses the quality too, 100 saves it lossless
+            bool hasQuality = WellKnownFileFormats.IsEqualFormat(WellKnownFileFormats.Jpg, settings.Format) ||
+                              WellKnownFileFormats.IsEqualFormat(WellKnownFileFormats.Jxl, settings.Format);
 
             _reduceColors = ThemedControls.CreateCheckBox(Texts.Settings.Reducecolors, settings.ReduceColors);
 
@@ -95,9 +97,9 @@ namespace Greenshot.Base.Wpf.Views
             DockPanel.SetDock(qualityValue, Dock.Right);
             qualityRow.Children.Add(qualityValue);
             qualityRow.Children.Add(_qualitySlider);
-            // The quality only matters for JPEG
-            qualityLabel.IsEnabled = qualityRow.IsEnabled = isJpeg;
-            qualityLabel.Opacity = qualityRow.Opacity = isJpeg ? 1 : 0.5;
+            // The quality only matters for JPEG and JPEG XL
+            qualityLabel.IsEnabled = qualityRow.IsEnabled = hasQuality;
+            qualityLabel.Opacity = qualityRow.Opacity = hasQuality ? 1 : 0.5;
 
             _dontAskAgain = ThemedControls.CreateCheckBox(Texts.Core.QualitydialogDontaskagain, false);
             _dontAskAgain.Margin = new Thickness(0, 10, 0, 0);
